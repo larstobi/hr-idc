@@ -1,0 +1,61 @@
+Using the example programs
+==========================
+
+The server listens on port 1389 by default.
+
+Trivial server using RAM hash
+-----------------------------
+
+$ ./ldap_server.rb
+
+In another window, load from file:
+
+$ ldapadd [-x] -H ldap://127.0.0.1:1389/ -f ldap_data.dump
+
+or load from STDIN:
+
+$ ldapadd [-x] -H ldap://127.0.0.1:1389/
+dn: dc=example,dc=com
+cn: Top object
+
+dn: cn=Fred Flintstone,dc=example,dc=com
+cn: Fred Flintstone
+sn: Flintstone
+mail: fred@bedrock.org
+mail: fred.flintstone@bedrock.org
+
+dn: cn=Wilma Flintstone,dc=example,dc=com
+cn: Wilma Flintstone
+mail: wilma@bedrock.org
+^D
+
+Try these queries:
+
+$ ldapsearch [-x] -H ldap://127.0.0.1:1389/ -b "" "(objectclass=*)"
+$ ldapsearch [-x] -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" -s base "(objectclass=*)"
+$ ldapsearch [-x] -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" "(mail=fred*)"
+
+If you terminate the server with Ctrl-C, its contents should be written
+to disk as a YAML file.
+
+A fairly complete set of the filter language is implemented. However, this
+simple server works by simply scanning the entire database and applying the
+filter to each entry, so it won't scale to large applications. No validation
+of DN or attributes against any sort of schema is done.
+
+With SSL
+--------
+
+In ldap_server.rb, within LDAP::Server.new, configure these:
+
+	:port               => 1636,
+	:ssl_key_file		=> "key.pem",
+	:ssl_cert_file		=> "cert.pem",
+	:ssl_on_connect		=> true,
+
+To use pre-generated DH parameters, add this:
+
+    :ssl_dhparams       => "dhparams.pem",
+
+To generate DH parameters, use OpenSSL:
+    $ openssl dhparam -out dhparams.pem 2048

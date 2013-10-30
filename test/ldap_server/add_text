@@ -1,0 +1,4 @@
+dn: cn=examleuser,ou=users,ou=example,ou=central,dc=idc,dc=com
+changetype: modify
+add: extensionAttribute9
+extensionAttribute9: Change:Quit

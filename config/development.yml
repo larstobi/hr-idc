@@ -1,0 +1,13 @@
+---
+log:
+    file: 'example-idc.log'
+    level: 'WARN'
+hrsys:
+  base_url: 'https://idc:secret@127.0.0.1:8080/hrs/resources'
+ad:
+  host: 'ad-001.example.com'
+  port: '1636'
+  ssl: 'true'
+  bind_dn: 'LOCAL\serviceidc'
+  base_dn: 'dc=local,dc=com'
+  password: 'secret'

@@ -1,0 +1,14 @@
+---
+log:
+    file: 'example-idc.log'
+    level: 'DEBUG'
+hrsys:
+  base_url: 'http://127.0.0.1:8080'
+ad:
+  hosts: ['ldaptest.example.com']
+  host: 'ldaptest.example.com'
+  port: '1636'
+  ssl: 'true'
+  base_dn: 'dc=example,dc=com'
+  bind_dn: ''
+  password: ''

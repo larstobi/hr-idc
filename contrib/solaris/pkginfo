@@ -1,0 +1,9 @@
+DESC=Identity Control Batch Scripts
+CATEGORY=system
+EMAIL=admin@example.com
+NAME=Identity Control Batch Scripts
+PKG=EXidcbatch
+ARCH=i386,sparc
+BASEDIR=/
+VERSION=v1.1,2011-01-01
+CLASSES=none

@@ -1,0 +1,1 @@
+ldapsearch -x -H ldaps://ldaptest.example.com:1636/ -b dc=example,dc=com "(&(objectClass=user)(sAMAccountName=username))"
